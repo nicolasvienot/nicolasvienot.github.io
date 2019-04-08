@@ -36,7 +36,7 @@ var render = function () {
   // rotate the cube
   cube.rotation.x += 0.01;
   cube.rotation.y += 0.01;
-  renderer.setClearColor( 0xffffff, 0);
+  // renderer.setClearColor( 0xffffff, 0);
   renderer.render(scene, camera);
 };
 
