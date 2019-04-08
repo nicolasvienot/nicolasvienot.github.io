@@ -8,26 +8,34 @@ scene.background = new THREE.Color( 0xffffff );
 renderer.setSize(width, height);
 document.body.appendChild(renderer.domElement);
 var geometry = new THREE.BoxGeometry(1, 1, 1);
-var material = new THREE.MeshFaceMaterial([
-    new THREE.MeshBasicMaterial({
-        color: 0x00ff00
-    }),
-    new THREE.MeshBasicMaterial({
-        color: 0xff0000
-    }),
-    new THREE.MeshBasicMaterial({
-        color: 0x0000ff,
-    }),
-    new THREE.MeshBasicMaterial({
-        color: 0xffff00
-    }),
-    new THREE.MeshBasicMaterial({
-        color: 0x00ffff
-    }),
-    new THREE.MeshBasicMaterial({
-        color: 0xff00ff
-    })
-]);
+// var material = new THREE.MeshFaceMaterial([
+//     new THREE.MeshBasicMaterial({
+//         color: 0x00ff00
+//     }),
+//     new THREE.MeshBasicMaterial({
+//         color: 0xff0000
+//     }),
+//     new THREE.MeshBasicMaterial({
+//         color: 0x0000ff,
+//     }),
+//     new THREE.MeshBasicMaterial({
+//         color: 0xffff00
+//     }),
+//     new THREE.MeshBasicMaterial({
+//         color: 0x00ffff
+//     }),
+//     new THREE.MeshBasicMaterial({
+//         color: 0xff00ff
+//     })
+// ]);
+
+var material = new THREE.MeshPhongMaterial({
+    ambient: 0x55555,
+    color: 0x55555,
+    specular: 0xffffff,
+    shininess: 50,
+    shading: THREE.SmoothShading
+  });
 
 var cube = new THREE.Mesh(geometry, material);
 cube.rotation.x = Math.PI/4;
