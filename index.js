@@ -2,7 +2,7 @@ var width = 500;
 var height = 500;
 
 var scene = new THREE.Scene();
-// scene.background = new THREE.Color( 0xff0000 );
+scene.background = new THREE.Color( 0xffffff );
 var camera = new THREE.PerspectiveCamera(25, width/height, 0.1, 1000);
 
 var renderer = new THREE.WebGLRenderer();
@@ -13,10 +13,10 @@ document.body.appendChild(renderer.domElement);
 var geometry = new THREE.BoxGeometry(1,1,1);
 var material = new THREE.MeshPhongMaterial({
   ambient: 0x55555,
-  // color: 0x55555,
-  // specular: 0xffffff,
-  // shininess: 50,
-  // shading: THREE.SmoothShading
+  color: 0x55555,
+  specular: 0xffffff,
+  shininess: 50,
+  shading: THREE.SmoothShading
 });
 var cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
