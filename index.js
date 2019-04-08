@@ -12,10 +12,10 @@ document.body.appendChild(renderer.domElement);
 // create the cube
 var geometry = new THREE.BoxGeometry(1,1,1);
 var material = new THREE.MeshPhongMaterial({
-  ambient: 0x55555,
+  // ambient: 0x55555,
   color: 0x55555,
-  specular: 0xffffff,
-  shininess: 50,
+  // specular: 0xffffff,
+  // shininess: 50,
   shading: THREE.SmoothShading
 });
 var cube = new THREE.Mesh(geometry, material);
