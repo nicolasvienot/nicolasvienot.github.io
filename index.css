@@ -11,5 +11,9 @@ canvas {
     bottom: 0;
     left: 0;
     right: 0;
+}
 
+#stop,p {
+    margin-top: 2px;;
+    padding: 0;
 }
