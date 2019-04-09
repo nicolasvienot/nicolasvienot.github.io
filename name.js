@@ -31,7 +31,7 @@ window.addEventListener('resize', fullScreen, false)
 
 // Scene
 var scene = new THREE.Scene();
-// scene.background = new THREE.Color('#FFFFFF');
+scene.background = new THREE.Color('#FFFFFF');
 
 // Camera and position
 var camera = new THREE.PerspectiveCamera(10, width / height, 1, 10000);
