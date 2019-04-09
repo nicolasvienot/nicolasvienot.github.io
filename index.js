@@ -1,12 +1,12 @@
 var width = 500;
 var height = 500;
-var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(25, width/height, 0.1, 1000);
-var renderer = new THREE.WebGLRenderer();
-scene.background = new THREE.Color( 0xffffff );
+var scene2 = new THREE.Scene();
+var camera2 = new THREE.PerspectiveCamera(25, width / height, 0.1, 1000);
+var renderer2 = new THREE.WebGLRenderer();
+scene2.background = new THREE.Color(0xffffff);
 
-renderer.setSize(width, height);
-document.body.appendChild(renderer.domElement);
+renderer2.setSize(width, height);
+document.body.appendChild(renderer2.domElement);
 var geometry = new THREE.BoxGeometry(1, 1, 1);
 // var material = new THREE.MeshFaceMaterial([
 //     new THREE.MeshBasicMaterial({
@@ -30,80 +30,80 @@ var geometry = new THREE.BoxGeometry(1, 1, 1);
 // ]);
 
 var material = new THREE.MeshPhongMaterial({
-    ambient: 0x55555,
-    color: 0x55555,
-    specular: 0xffffff,
-    shininess: 50,
-    shading: THREE.SmoothShading
-  });
+	ambient: 0x55555,
+	color: 0x55555,
+	specular: 0xffffff,
+	shininess: 50,
+	shading: THREE.SmoothShading
+});
 
 var cube = new THREE.Mesh(geometry, material);
-cube.rotation.x = Math.PI/4;
-cube.rotation.y = Math.PI/4;
-scene.add(cube);
+cube.rotation.x = Math.PI / 4;
+cube.rotation.y = Math.PI / 4;
+scene2.add(cube);
 
-scene.add( new THREE.AmbientLight(0xffffff) );
+scene2.add(new THREE.AmbientLight(0xffffff));
 var light = new THREE.PointLight(0xffffff, 6, 40);
 light.position.set(20, 20, 20);
-scene.add(light);
+scene2.add(light);
 
-camera.position.z = 10;
+camera2.position.z = 10;
 
 var isDragging = false;
 var previousMousePosition = {
-    x: 0,
-    y: 0
+	x: 0,
+	y: 0
 };
 
-$(renderer.domElement).on('mousedown', function(e) {
-    isDragging = true;
+$(renderer2.domElement).on('mousedown', function (e) {
+	isDragging = true;
 })
 
-.on('mousemove', function(e) {
-    var deltaMove = {
-        x: e.offsetX-previousMousePosition.x,
-        y: e.offsetY-previousMousePosition.y
-    };
-    if(isDragging) {  
-        var deltaRotationQuaternion = new THREE.Quaternion()
-        .setFromEuler(new THREE.Euler(toRadians(deltaMove.y * 1), toRadians(deltaMove.x * 1), 0, 'XYZ'));
-        cube.quaternion.multiplyQuaternions(deltaRotationQuaternion, cube.quaternion);
-    }
-    previousMousePosition = {
-        x: e.offsetX,
-        y: e.offsetY
-    };
+	.on('mousemove', function (e) {
+		var deltaMove = {
+			x: e.offsetX - previousMousePosition.x,
+			y: e.offsetY - previousMousePosition.y
+		};
+		if (isDragging) {
+			var deltaRotationQuaternion = new THREE.Quaternion()
+				.setFromEuler(new THREE.Euler(toRadians(deltaMove.y * 1), toRadians(deltaMove.x * 1), 0, 'XYZ'));
+			cube.quaternion.multiplyQuaternions(deltaRotationQuaternion, cube.quaternion);
+		}
+		previousMousePosition = {
+			x: e.offsetX,
+			y: e.offsetY
+		};
+	});
+
+$(document).on('mouseup', function (e) {
+	isDragging = false;
 });
 
-$(document).on('mouseup', function(e) {
-    isDragging = false;
-});
-
-window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame ||
-        window.webkitRequestAnimationFrame ||
-        window.mozRequestAnimationFrame ||
-        function(callback) {
-            window.setTimeout(callback, 1000 / 60);
-        };
+window.requestAnimFrame = (function () {
+	return window.requestAnimationFrame ||
+		window.webkitRequestAnimationFrame ||
+		window.mozRequestAnimationFrame ||
+		function (callback) {
+			window.setTimeout(callback, 1000 / 60);
+		};
 })();
 
 var clic = false;
 
-$("#stop").on('click', function(e) {
-    if (clic == false)
-        clic = true;
-    else
-        clic = false; 
+$("#stop").on('click', function (e) {
+	if (clic == false)
+		clic = true;
+	else
+		clic = false;
 });
 
 function render() {
-    renderer.render(scene, camera); 
-    if (clic == false) {
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
-    }
-    requestAnimFrame(render);
+	renderer2.render(scene2, camera2);
+	if (clic == false) {
+		cube.rotation.x += 0.01;
+		cube.rotation.y += 0.01;
+	}
+	requestAnimFrame(render);
 }
 
 render();
