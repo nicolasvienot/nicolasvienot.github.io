@@ -8,7 +8,7 @@ const defaultAnimationSpeed = 1,
 	color = '#FFFFFF';
 
 var width = 1000;
-var height = 500;
+var height = 300;
 
 // Triggers
 const triggers = document.getElementsByTagName('span')
@@ -53,7 +53,7 @@ light.position.set(20, 20, 20);
 scene.add(light);
 
 // Orbit Controls
-var controls = new THREE.OrbitControls(camera);
+var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.update();
 
 // Particle Vars
@@ -71,27 +71,18 @@ var typeface = 'https://dl.dropboxusercontent.com/s/bkqic142ik0zjed/swiss_black_
 
 loader.load(typeface, (font) => {
 	Array.from(triggers).forEach((trigger, idx) => {
-
 		texts[idx] = {};
-
 		texts[idx].geometry = new THREE.TextGeometry(trigger.textContent, {
 			font: font,
 			size: width * 0.02,
 			height: 4,
 			curveSegments: 10,
 		});
-
 		THREE.GeometryUtils.center(texts[idx].geometry)
-
-
 		texts[idx].particles = new THREE.Geometry();
-
 		texts[idx].points = THREE.GeometryUtils.randomPointsInGeometry(texts[idx].geometry, particleCount);
-
 		createVertices(texts[idx].particles, texts[idx].points)
-
 		enableTrigger(trigger, idx);
-
 	});
 });
 
@@ -149,18 +140,17 @@ let animationVars = {
 	rotation: -45
 }
 
+var clic = false;
 
 function animate() {
-
-	particleSystem.rotation.y += animationVars.speed;
+	if (clic == false) {
+		particleSystem.rotation.y += animationVars.speed;
+	}
 	particles.verticesNeedUpdate = true;
-
 	// camera.position.z = animationVars.rotation;
 	// camera.position.y = animationVars.rotation;
 	camera.lookAt(scene.position);
-
 	particleSystem.material.color = new THREE.Color(animationVars.color);
-
 	window.requestAnimationFrame(animate);
 	renderer.render(scene, camera);
 }
@@ -168,21 +158,16 @@ function animate() {
 animate();
 
 function morphTo(newParticles, color = '#FFFFFF') {
-
 	TweenMax.to(animationVars, .1, {
 		ease: Power4.easeIn,
 		speed: fullSpeed,
 		onComplete: slowDown
 	});
-
 	TweenMax.to(animationVars, 2, {
 		ease: Linear.easeNone,
 		color: color
 	});
-
-
 	// particleSystem.material.color.setHex(color);
-
 	for (var i = 0; i < particles.vertices.length; i++) {
 		TweenMax.to(particles.vertices[i], 2, {
 			ease: Elastic.easeOut.config(0.1, .3),
@@ -191,14 +176,13 @@ function morphTo(newParticles, color = '#FFFFFF') {
 			z: newParticles.vertices[i].z
 		})
 	}
-
 	// console.log(animationVars.rotation)
-
 	TweenMax.to(animationVars, 2, {
 		ease: Elastic.easeOut.config(0.1, .3),
 		rotation: animationVars.rotation == 45 ? -45 : 45,
 	})
 }
+
 function slowDown() {
 	TweenMax.to(animationVars, 0.3, {
 		ease:
