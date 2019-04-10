@@ -20,14 +20,14 @@ renderer.setSize(width, height);
 document.body.appendChild(renderer.domElement);
 
 // Ensure Full Screen on Resize
-function fullScreen() {
-	camera.aspect = width / height;
-	camera.updateProjectionMatrix();
+// function fullScreen() {
+// 	camera.aspect = width / height;
+// 	camera.updateProjectionMatrix();
 
-	renderer.setSize(width, height);
-}
+// 	renderer.setSize(width, height);
+// }
 
-window.addEventListener('resize', fullScreen, false)
+// window.addEventListener('resize', fullScreen, false)
 
 // Scene
 var scene = new THREE.Scene();
