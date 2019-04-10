@@ -34,7 +34,7 @@ var scene = new THREE.Scene();
 scene.background = new THREE.Color('#FFFFFF');
 
 // Camera and position
-var camera = new THREE.PerspectiveCamera(10, width / height, 1, 10000);
+var camera = new THREE.PerspectiveCamera(20, width / height, 1, 10000);
 
 // camera.position.y = -45;
 // camera.position.z = -45;
