@@ -7,7 +7,7 @@ const defaultAnimationSpeed = 1,
 	morphAnimationSpeed = 18,
 	color = '#FFFFFF';
 
-var width = 1000;
+var width = 800;
 var height = 300;
 
 // Triggers
